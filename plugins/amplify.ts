@@ -15,8 +15,8 @@ export default defineNuxtPlugin((nuxtApp) => {
               'email',
               'openid',
             ],
-            redirectSignIn: 'http://localhost:3000/',
-            redirectSignOut: 'http://localhost:3000/',
+            redirectSignIn: 'https://chatgpt.tcanationals.com/',
+            redirectSignOut: 'https://chatgpt.tcanationals.com/',
             clientId: '5ddfkn0v3fsb80keniulioo44i',
             responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
           },
