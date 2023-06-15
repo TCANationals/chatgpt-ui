@@ -224,11 +224,11 @@ const drawer = useDrawer()
                 ></v-btn>
               </template>
               <v-list>
-                <v-list-item
+                <!-- <v-list-item
                     :title="$t('resetPassword')"
                     to="/account/resetPassword"
                 >
-                </v-list-item>
+                </v-list-item> -->
                 <v-list-item
                     :title="$t('signOut')"
                     @click="signOut"
@@ -331,7 +331,7 @@ const drawer = useDrawer()
             <div class="px-1">
               <v-list density="compact">
       
-                <v-dialog
+                <!-- <v-dialog
                     v-model="clearConfirmDialog"
                     persistent
                 >
@@ -380,7 +380,7 @@ const drawer = useDrawer()
       
                 <ApiKeyDialog
                     v-if="$settings.open_api_key_setting === 'True'"
-                />
+                /> -->
       
                 <ModelParameters/>
       
@@ -421,12 +421,12 @@ const drawer = useDrawer()
       
                 <SettingsLanguages/>
       
-                <v-list-item
+                <!-- <v-list-item
                     rounded="xl"
                     prepend-icon="help_outline"
                     :title="$t('feedback')"
                     @click="feedback"
-                ></v-list-item>
+                ></v-list-item> -->
 
               </v-list>
             </div>

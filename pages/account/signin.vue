@@ -43,11 +43,11 @@
               <div
                 class="mt-5 d-flex justify-space-between"
               >
-                <v-btn
+                <!-- <v-btn
                     @click="navigateTo('/account/signup')"
                     variant="text"
                     color="primary"
-                >{{$t('createAccount')}}</v-btn>
+                >{{$t('createAccount')}}</v-btn> -->
 
                 <v-btn
                     color="primary"
