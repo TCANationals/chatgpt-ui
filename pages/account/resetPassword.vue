@@ -1,6 +1,6 @@
 <script setup>
 definePageMeta({
-  middleware: ["auth"]
+  //middleware: ["auth"]
 })
 const formData = ref({
   old_password: '',

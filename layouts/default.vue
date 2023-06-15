@@ -2,7 +2,21 @@
   <v-app
       :theme="$colorMode.value"
   >
-    <NavigationDrawer />
+    <authenticator v-if="false"></authenticator>
+    <template v-if="auth.authStatus === 'authenticated'">
+      <NavigationDrawer />
+    </template>
     <slot />
   </v-app>
 </template>
+
+<script setup>
+definePageMeta({
+  //middleware: ["auth"],
+  path: '/:id?',
+  keepalive: true
+})
+
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-vue';
+const auth = useAuthenticator();
+</script>

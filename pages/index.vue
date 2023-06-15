@@ -1,15 +1,24 @@
 <script setup>
 definePageMeta({
-  middleware: ["auth"],
+  //middleware: ["auth"],
   path: '/:id?',
   keepalive: true
 })
+
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-vue'
+import { Auth }  from 'aws-amplify'
+
+const auth = useAuthenticator();
 
 const { $i18n } = useNuxtApp()
 const runtimeConfig = useRuntimeConfig()
 const drawer = useDrawer()
 const route = useRoute()
 const conversation = ref(getDefaultConversationData())
+
+const signIn = async () => {
+  Auth.federatedSignIn({customProvider: 'cfzero'})
+}
 
 const loadConversation = async () => {
   const { data, error } = await useAuthFetch('/api/chat/conversations/' + route.params.id)
@@ -37,6 +46,9 @@ const createNewConversation = () => {
 
 
 onMounted(async () => {
+  Auth.currentAuthenticatedUser().then(authData => {
+    setUser(authData)
+  }).catch(err => {})
   if (route.params.id) {
     conversation.value.loadingMessages = true
     await loadConversation()
@@ -58,35 +70,41 @@ onActivated(async () => {
     createNewConversation()
   }
 })
-
 </script>
 
+
 <template>
-  <v-app-bar>
-    <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+  <authenticator v-if="false"></authenticator>
+  <template v-if="auth.authStatus === 'unauthenticated'">
+    <v-btn color="primary" :loading="submitting" @click="signIn" size="large">{{$t('signIn')}}</v-btn>
+  </template>
+  <template v-if="auth.authStatus === 'authenticated'">
+    <v-app-bar>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-    <v-toolbar-title>{{ navTitle }}</v-toolbar-title>
+      <v-toolbar-title>{{ navTitle }}</v-toolbar-title>
 
-    <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-    <v-btn
-        :title="$t('newConversation')"
-        icon="add"
-        @click="createNewConversation"
-        class="d-md-none ma-3"
-    ></v-btn>
-    <v-btn
-        variant="outlined"
-        class="text-none d-none d-md-block"
-        @click="createNewConversation"
-    >
-      {{ $t('newConversation') }}
-    </v-btn>
+      <v-btn
+          :title="$t('newConversation')"
+          icon="add"
+          @click="createNewConversation"
+          class="d-md-none ma-3"
+      ></v-btn>
+      <v-btn
+          variant="outlined"
+          class="text-none d-none d-md-block"
+          @click="createNewConversation"
+      >
+        {{ $t('newConversation') }}
+      </v-btn>
 
-  </v-app-bar>
+    </v-app-bar>
 
-  <v-main>
-    <Welcome v-if="!route.params.id && conversation.messages.length === 0" />
-    <Conversation :conversation="conversation" />
-  </v-main>
+    <v-main>
+      <Welcome v-if="!route.params.id && conversation.messages.length === 0" />
+      <Conversation :conversation="conversation" />
+    </v-main>
+  </template>
 </template>

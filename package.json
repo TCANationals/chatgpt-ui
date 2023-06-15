@@ -19,7 +19,11 @@
     "vuepress": "^2.0.0-beta.61"
   },
   "dependencies": {
+    "@aws-amplify/ui-components": "^1.9.40",
+    "@aws-amplify/ui-react": "^5.0.1",
+    "@aws-amplify/ui-vue": "^3.1.18",
     "@microsoft/fetch-event-source": "^2.0.1",
+    "aws-amplify": "^5.2.6",
     "copy-to-clipboard": "^3.3.3",
     "highlight.js": "^11.7.0",
     "http-proxy-middleware": "3.0.0-beta.1",

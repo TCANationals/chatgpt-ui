@@ -1,18 +1,24 @@
+import { Auth }  from 'aws-amplify';
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
+    console.log('auth middleware')
     const user = useUser()
     const signInPath = '/account/signin'
     if (!user.value && to.path !== signInPath) {
-        const { error, data} = await fetchUser()
-        if (error.value) {
+        try {
+            const authUser = await Auth.currentAuthenticatedUser()
+            console.log(authUser)
+            setUser(authUser)
+        } catch (e) {
+            console.log(e)
             return navigateTo({
                 path: signInPath,
                 query: {
                     callback: encodeURIComponent(to.fullPath)
                 }
             })
-        } else {
-            setUser(data.value)
         }
+    } else {
+        console.log(user.value)
     }
 })

@@ -46,9 +46,9 @@ export const genTitle = async (conversationId) => {
     return null
 }
 
-export const fetchUser = async () => {
-    return useMyFetch('/api/account/user/')
-}
+// export const fetchUser = async () => {
+//     return useMyFetch('/api/account/user/')
+// }
 
 export const setUser = (userData) => {
     const user = useUser()

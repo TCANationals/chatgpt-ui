@@ -85,12 +85,20 @@ const fetchReply = async (message) => {
   }, webSearchParams)
 
   try {
+    const user = useUser()
+    let authValue = null
+    if (user && user.value && user.value.signInUserSession) {
+      authValue = 'Bearer ' + user.value.signInUserSession.idToken.jwtToken
+    } else {
+        console.log('no auth convo')
+    }
     await fetchEventSource('/api/conversation/', {
       signal: ctrl.signal,
       method: 'POST',
       headers: {
         'accept': 'application/json',
         'Content-Type': 'application/json',
+        'Authorization': authValue,
       },
       body: JSON.stringify(data),
       openWhenHidden: true,

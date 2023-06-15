@@ -3,9 +3,18 @@ const appName = process.env.NUXT_PUBLIC_APP_NAME ?? 'ChatGPT UI'
 export default defineNuxtConfig({
     debug: process.env.NODE_ENV !== 'production',
     ssr: process.env.SSR !== 'false',
+    alias: {
+        "./runtimeConfig": "./runtimeConfig.browser"
+    },
+    vite: {
+        define: {
+            "window.global": {}
+        }
+    },
     app: {
         head: {
             title: appName,
+            //script: [{ innerHTML: 'window.global = window' }, { innerHTML: 'var exports = {}' }],
         },
     },
     runtimeConfig: {
@@ -23,6 +32,7 @@ export default defineNuxtConfig({
         'vuetify/styles',
         'material-design-icons-iconfont/dist/material-design-icons.css',
         'highlight.js/styles/panda-syntax-dark.css',
+        '@aws-amplify/ui-vue/styles.css',
     ],
     modules: [
         '@kevinmarrec/nuxt-pwa',

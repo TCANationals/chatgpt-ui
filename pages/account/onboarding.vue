@@ -1,7 +1,7 @@
 <script setup>
 definePageMeta({
   layout: 'vuetify-app',
-  middleware: ['auth']
+  //middleware: ['auth']
 })
 const route = useRoute()
 const sending = ref(false)
