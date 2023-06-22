@@ -4,8 +4,8 @@
   >
     <authenticator v-if="false"></authenticator>
     <template v-if="auth.authStatus === 'authenticated'">
-      <NavigationDrawer />
     </template>
+    <NavigationDrawer />
     <slot />
   </v-app>
 </template>
