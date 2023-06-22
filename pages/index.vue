@@ -76,9 +76,11 @@ onActivated(async () => {
 <template>
   <authenticator v-if="false"></authenticator>
   <template v-if="auth.authStatus === 'unauthenticated'">
-    <v-btn color="primary" :loading="submitting" @click="signIn" size="large">{{$t('signIn')}}</v-btn>
+    <!-- <v-btn color="primary" :loading="submitting" @click="signIn" size="large">{{$t('signIn')}}</v-btn> -->
   </template>
   <template v-if="auth.authStatus === 'authenticated'">
+  </template>
+  <template>
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
