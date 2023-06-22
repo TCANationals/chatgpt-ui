@@ -80,7 +80,6 @@ onActivated(async () => {
   </template>
   <template v-if="auth.authStatus === 'authenticated'">
   </template>
-  <template>
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
@@ -108,5 +107,4 @@ onActivated(async () => {
       <Welcome v-if="!route.params.id && conversation.messages.length === 0" />
       <Conversation :conversation="conversation" />
     </v-main>
-  </template>
 </template>
